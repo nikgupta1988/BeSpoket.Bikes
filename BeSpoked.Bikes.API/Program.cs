@@ -1,10 +1,16 @@
+using BeSpoked.Bikes.API.BAL;
+using BeSpoked.Bikes.API.DAL;
 using BeSpoked.Bikes.API.Data;
+using BeSpoked.Bikes.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IProductRepo, SqlProductRepo>();
+builder.Services.AddScoped<IProductDal, ProductDAL>();
+builder.Services.AddScoped<IProductBAL, ProductBAL>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
