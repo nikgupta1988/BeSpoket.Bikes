@@ -1,3 +1,4 @@
+using BeSpoked.Bikes.API.Automapper;
 using BeSpoked.Bikes.API.BAL;
 using BeSpoked.Bikes.API.DAL;
 using BeSpoked.Bikes.API.Data;
@@ -11,6 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IProductRepo, SqlProductRepo>();
 builder.Services.AddScoped<IProductDal, ProductDAL>();
 builder.Services.AddScoped<IProductBAL, ProductBAL>();
+builder.Services.AddAutoMapper(typeof(AutomapperProfile));
+
+
+builder.Services.AddScoped<ISalesPersonRepo, SqlSalesPersonRepo>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
