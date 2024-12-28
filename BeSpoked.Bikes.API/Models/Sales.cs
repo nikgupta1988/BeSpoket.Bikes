@@ -3,12 +3,12 @@
     public class Sales
     {
         public Guid SaleID { get; set; }
-        public Guid ProductID { get; set; }
-        public Guid SP_ID { get; set; }
-        public Guid CUST_ID { get; set; }
-
         public DateTime sellDate { get; set; }
 
+        public Guid ProductsProductID { get; set; }
+
+        public Guid SalesPersonSP_ID { get; set; }
+        public Guid CustomerCUST_ID { get; set; }
 
         //Nabigation props 
         public Products Products { get; set; }

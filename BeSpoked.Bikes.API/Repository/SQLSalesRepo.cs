@@ -2,6 +2,7 @@
 using BeSpoked.Bikes.API.Data;
 using BeSpoked.Bikes.API.Models;
 using BeSpoked.Bikes.API.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeSpoked.Bikes.API.Repository
 {
@@ -17,16 +18,24 @@ namespace BeSpoked.Bikes.API.Repository
         }
         public async Task<Sales> CreateSellAsync(Sales sellReq)
         {
+            try
+            {
 
-            
-            await bikesDbContext.Sales.AddAsync(sellReq);
-            await bikesDbContext.SaveChangesAsync();
-            return sellReq;
+                await bikesDbContext.Sales.AddAsync(sellReq);
+                await bikesDbContext.SaveChangesAsync();
+                return sellReq;
+            }
+            catch(Exception ex)
+            {
+                return null;
+
+            }
         }
 
-        public Task<List<Sales>> GetSellAsync()
+        public async Task<List<Sales>> GetSellAsync()
         {
-            throw new NotImplementedException();
+            var result = await bikesDbContext.Sales.Include("Products").Include("SalesPerson").Include("Customer").ToListAsync();
+            return result;
         }
     }
 }

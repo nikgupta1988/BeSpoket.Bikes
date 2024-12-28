@@ -21,6 +21,14 @@ namespace BeSpoked.Bikes.API.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllSales()
+        {
+
+            var saleList = await saleRepo.GetSellAsync();
+            return Ok(saleList);
+        }
+
         [Route("Createsale")]
         [HttpPost]
         public async Task<IActionResult> CreatesaleAsync([FromBody] CreateSellRequest saleReq)
@@ -29,11 +37,11 @@ namespace BeSpoked.Bikes.API.Controllers
             {
                 var salerequest = mapper.Map<Sales>(saleReq);
 
-                var salePersonDetaildto = await saleRepo.CreateSellAsync(salerequest);
+                var saleDetail = await saleRepo.CreateSellAsync(salerequest);
 
                 // convert dto into model back
-                var saleDetail = mapper.Map<Sales>(salePersonDetaildto);
-                return Ok(saleDetail);
+                var saleDetaildto = mapper.Map<CreateSellRequest>(saleDetail);
+                return Ok(saleDetaildto);
             }
 
             catch (Exception ex)
