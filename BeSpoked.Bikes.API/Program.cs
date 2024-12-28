@@ -16,6 +16,9 @@ builder.Services.AddAutoMapper(typeof(AutomapperProfile));
 
 
 builder.Services.AddScoped<ISalesPersonRepo, SqlSalesPersonRepo>();
+builder.Services.AddScoped<IcustomerRepo, SqlCustomerRepo>();
+builder.Services.AddScoped<IsaleRepo, SQLSalesRepo>();
+
 
 
 builder.Services.AddControllers();

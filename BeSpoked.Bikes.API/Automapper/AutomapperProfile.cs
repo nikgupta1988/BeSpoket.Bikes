@@ -9,6 +9,10 @@ namespace BeSpoked.Bikes.API.Automapper
         public AutomapperProfile()
         {
             CreateMap<SalesPerson, AddorUpdateSalePerson>().ReverseMap();
+
+            CreateMap<Customer, AddorUpdateCustomerReq>().ReverseMap();
+
+            CreateMap<Sales, CreateSellRequest>().ReverseMap();
         }
     }
 }

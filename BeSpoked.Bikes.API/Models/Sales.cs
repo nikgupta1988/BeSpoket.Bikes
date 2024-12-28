@@ -4,7 +4,6 @@
     {
         public Guid SaleID { get; set; }
         public Guid ProductID { get; set; }
-
         public Guid SP_ID { get; set; }
         public Guid CUST_ID { get; set; }
 
