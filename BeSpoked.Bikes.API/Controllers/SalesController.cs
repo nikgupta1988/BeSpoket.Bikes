@@ -21,11 +21,12 @@ namespace BeSpoked.Bikes.API.Controllers
             this.mapper = mapper;
         }
 
+        //Filter the recode based on date range 
         [HttpGet]
-        public async Task<IActionResult> GetAllSales()
+        public async Task<IActionResult> GetAllSales([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate )
         {
 
-            var saleList = await saleRepo.GetSellAsync();
+            var saleList = await saleRepo.GetSellAsync(startDate,endDate);
             return Ok(saleList);
         }
 

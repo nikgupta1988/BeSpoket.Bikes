@@ -32,10 +32,19 @@ namespace BeSpoked.Bikes.API.Repository
             }
         }
 
-        public async Task<List<Sales>> GetSellAsync()
+        public async Task<List<Sales>> GetSellAsync(DateTime? startDate, DateTime? EndDate)
         {
-            var result = await bikesDbContext.Sales.Include("Products").Include("SalesPerson").Include("Customer").ToListAsync();
-            return result;
+            var SaleData = bikesDbContext.Sales.Include("Products").Include("SalesPerson").Include("Customer").AsQueryable();
+            if (startDate.HasValue)
+            {
+                SaleData = SaleData.Where(s => s.sellDate >= startDate.Value);
+            }
+            if (EndDate.HasValue)
+            {
+                SaleData = SaleData.Where(s => s.sellDate <= EndDate.Value);
+            }
+            //var result = await bikesDbContext.Sales.Include("Products").Include("SalesPerson").Include("Customer").ToListAsync();
+            return await SaleData.ToListAsync();
         }
     }
 }
